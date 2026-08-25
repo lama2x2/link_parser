@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mdlink"
+version = "1.0.0"
+description = "CLI-проверка ссылок в Markdown: локальные пути, якоря, внешние HTTP(S)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "mdlink contributors" }]
+keywords = ["markdown", "links", "linter", "ci", "documentation"]
+classifiers = [
+  "Environment :: Console",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+  "markdown-it-py>=3.0",
+  "httpx[http2]>=0.27",
+  "rich>=13.7",
+  "typer>=0.12",
+  "pathspec>=0.12",
+]
+
+[project.optional-dependencies]
+bare-urls = ["linkify-it-py>=2.0"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "respx>=0.21", "coverage>=7.4"]
+
+[project.scripts]
+mdlink = "mdlink.cli:run"
+
+[project.urls]
+Homepage = "https://github.com/mdlink/mdlink"
+
+[tool.setuptools.packages.find]
+include = ["mdlink*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning"]
+markers = ["slow: нефункциональные тесты (§13.3)"]

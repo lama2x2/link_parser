@@ -1,0 +1,21 @@
+# Пример конфигурации. Скопируйте в .mdlink.toml или перенесите
+# в pyproject.toml под секцию [tool.mdlink].
+# Приоритет: флаги CLI > переменные MDLINK_* > этот файл > дефолты.
+
+include = ["docs/**/*.md", "README.md"]
+exclude = ["**/CHANGELOG.md"]
+
+timeout = 15.0
+retries = 3
+concurrency = 8
+per-host = 4
+
+check-anchors = true
+check-images = true
+
+ignore-url = [
+  "^https://twitter\\.com/",
+  "^https://.*\\.internal\\.corp/",
+]
+
+fail-on = "error"
